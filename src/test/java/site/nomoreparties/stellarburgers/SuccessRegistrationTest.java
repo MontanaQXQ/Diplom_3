@@ -18,7 +18,7 @@ public class SuccessRegistrationTest {
     RegistrationPage registrationPage = new RegistrationPage();
 
     @Before
-    public void testBefore() {
+    public void setUp() {
         mainPage = open("https://stellarburgers.nomoreparties.site/", StellarburgerMainPage.class);
         loginPage = open("https://stellarburgers.nomoreparties.site/", LoginPage.class);
         registrationPage = open("https://stellarburgers.nomoreparties.site/", RegistrationPage.class);

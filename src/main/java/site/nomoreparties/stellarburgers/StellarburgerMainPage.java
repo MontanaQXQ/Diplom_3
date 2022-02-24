@@ -17,7 +17,21 @@ public class StellarburgerMainPage {
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Личный Кабинет')]")
     private SelenideElement enterLoginPagePersonalProfile;
 
+    //Локатор кнопки "Войти в аккаунт"
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Войти в аккаунт')]")
+    private SelenideElement enterLoginPageEnterButton;
+
+    //Локатор кнопки "Оформить заказ"
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Оформить заказ')]")
+    private SelenideElement createOrderButton;
+
+
+
+
     public void clickProfileInMainPage() {
         enterLoginPagePersonalProfile.shouldBe(visible).click();
+    }
+    public void clickEnterAccountButtonInMainPage() {
+        enterLoginPageEnterButton.shouldBe(visible).click();
     }
 }

@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 
-public class LoginBurgerSite {
+public class LoginBurgerSiteTest {
 
     UserOperations userOperations = new UserOperations();
     StellarburgerMainPage mainPage = new StellarburgerMainPage();
@@ -29,7 +29,7 @@ public class LoginBurgerSite {
 
 
     @Before
-    public void testBefore() {
+    public void setUp() {
         Configuration.holdBrowserOpen = true;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         mainPage = open("https://stellarburgers.nomoreparties.site/", StellarburgerMainPage.class);
@@ -40,8 +40,17 @@ public class LoginBurgerSite {
         userPassword = userData.get("password");
     }
 
+    @Test
+    public void  testEnterAccountButton() {
+        mainPage.clickEnterAccountButtonInMainPage();
+        loginPage.successLogin(userEmail,userPassword);
+        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        String expected = "Оформить заказ";
+        Assert.assertEquals(expected,actual);
+    }
+
     @After
-    public void CreateUserE(){
+    public void tearDown(){
         userOperations.delete();
 
     }
