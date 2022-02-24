@@ -28,7 +28,5 @@ public class ForgotPasswordPage {
     public  void clickEnterButton(){
         headTextForgotPassword.shouldBe(exist);
         enterLoginPage.shouldBe(visible).click();
-
-
     }
 }

@@ -43,6 +43,12 @@ public class LoginBurgerSiteTest {
         userPassword = userData.get("password");
     }
 
+    @After
+    public void tearDown(){
+        userOperations.delete();
+
+    }
+
     @Test
     public void  testEnterAccountButton() {
         mainPage.clickEnterAccountButtonInMainPage();
@@ -86,10 +92,6 @@ public class LoginBurgerSiteTest {
 
 
 
-    @After
-    public void tearDown(){
-        userOperations.delete();
 
-    }
 
 }

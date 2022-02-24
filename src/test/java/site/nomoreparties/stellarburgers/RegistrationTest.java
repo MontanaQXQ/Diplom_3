@@ -8,9 +8,8 @@ import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-import static com.codeborne.selenide.Selenide.open;
 
-public class SuccessRegistrationTest {
+public class RegistrationTest {
 
     StellarburgerMainPage mainPage = new StellarburgerMainPage();
     LoginPage loginPage = new LoginPage();
