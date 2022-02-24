@@ -1,6 +1,5 @@
 package site.nomoreparties.stellarburgers;
 
-import com.codeborne.selenide.Configuration;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +26,7 @@ public class SuccessRegistrationTest {
 
     @Test
     public void testSuccsessReistrationUser() {
-        mainPage.clickProfileInMainPage();
+        mainPage.clickPersonalProfileInMainPage();
         loginPage.goToRegistrationPage();
         registrationPage.successRegistration();
         String actual = $(byXpath(".//h2[contains(text(),'Вход')]")).getText();
@@ -38,7 +37,7 @@ public class SuccessRegistrationTest {
 
     @Test
     public void wrongReistrationUser() {
-        mainPage.clickProfileInMainPage();
+        mainPage.clickPersonalProfileInMainPage();
         loginPage.goToRegistrationPage();
         registrationPage.wrongRegistration();
         String actual = $(byXpath(".//*[contains(text(),'Некорректный пароль')]")).getText();

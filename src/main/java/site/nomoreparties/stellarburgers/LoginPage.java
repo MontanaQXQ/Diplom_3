@@ -36,6 +36,10 @@ public class LoginPage {
     @FindBy(how = How.XPATH,using = "//*[contains(text(),'Войти')]")
     private SelenideElement enterAccountButton;
 
+    //Локатор кнопки Зарегесрироваться
+    @FindBy(how = How.XPATH,using = ".//a[@href='/forgot-password']")
+    private SelenideElement enterForgotPasswordPage;
+
     //для кейса Регистрация пользователя
     public void goToRegistrationPage()  {
         headTextLogin.shouldBe(exist);
@@ -51,15 +55,22 @@ public class LoginPage {
     public void setPassword(String password){
         passwordPlaceHolder.setValue(password);
     }
-
+    //метод заполнения формы на странице Логин.
     public void enterAccount(String email, String password) {
         setEmail(email);
         setPassword(password);
     }
-
+    //метод Успешного входа в Личный кабинет Пользователя.
     public void successLogin(String email, String password){
         headTextLogin.shouldBe(exist);
         enterAccount(email,password);
         enterAccountButton.click();
     }
+
+    //метод клика на кнопку "Восстановить пароль"
+    public void clickForgotPasswordButton(){
+        headTextLogin.shouldBe(exist);
+        enterForgotPasswordPage.shouldBe(visible).click();
+    }
+
 }

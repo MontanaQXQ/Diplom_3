@@ -1,15 +1,10 @@
 package site.nomoreparties.stellarburgers;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
 
 public class StellarburgerMainPage {
 
@@ -19,7 +14,7 @@ public class StellarburgerMainPage {
 
     //Локатор кнопки "Войти в аккаунт"
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Войти в аккаунт')]")
-    private SelenideElement enterLoginPageEnterButton;
+    private SelenideElement enterLoginPageEnterAccountButton;
 
     //Локатор кнопки "Оформить заказ"
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Оформить заказ')]")
@@ -28,10 +23,10 @@ public class StellarburgerMainPage {
 
 
 
-    public void clickProfileInMainPage() {
+    public void clickPersonalProfileInMainPage() {
         enterLoginPagePersonalProfile.shouldBe(visible).click();
     }
     public void clickEnterAccountButtonInMainPage() {
-        enterLoginPageEnterButton.shouldBe(visible).click();
+        enterLoginPageEnterAccountButton.shouldBe(visible).click();
     }
 }

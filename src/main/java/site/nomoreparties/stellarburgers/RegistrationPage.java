@@ -35,6 +35,12 @@ public class RegistrationPage {
     @FindBy(how = How.XPATH, using = ".//*[contains(text(),'Некорректный пароль')]")
     private SelenideElement wrongPasswordMessage;
 
+    //Локатор кнопки войти , которая переводит на страницу логин
+    @FindBy(how = How.XPATH, using = ".//a[@href='/login']")
+    private SelenideElement enterLoginPage;
+
+
+
     //Метод заполнения Имени
     public void setName(String name){
         namelPlaceHolder.setValue(name);
@@ -50,19 +56,20 @@ public class RegistrationPage {
         passwordPlaceHolder.setValue(password);
 
     }
-
+    //метод  корректного заполнения формы регистрации
     public void correctFillingRegistrationForm() {
         setName(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT));
         setEmail(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT) + "@yandex.ru");
         setPassword(RandomStringUtils.random(6,true,true));
     }
-
+    //метод некорректного заполнения формы регистрации , длинна пароля меньше положенного.
     public void inCorrectFillingRegistrationForm() {
         setName(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT));
         setEmail(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT) + "@yandex.ru");
         setPassword(RandomStringUtils.random(5,true,true));
     }
 
+    //метод упешной регистрации пользовател
     public void successRegistration(){
         headTextRegistration.shouldBe(exist);
         correctFillingRegistrationForm();
@@ -70,14 +77,17 @@ public class RegistrationPage {
 
 
     }
-
+    //метод неправильнйо регистрации с возникающей ошибкой "Некорректный пароль"
     public void wrongRegistration(){
         headTextRegistration.shouldBe(exist);
         inCorrectFillingRegistrationForm();
         registrButton.click();
         wrongPasswordMessage.shouldBe(exist);
-
-
+    }
+    //метод нажатия кнопки "войти" на тсранице регистрации.
+    public void clickEnterButton(){
+        headTextRegistration.shouldBe(exist);
+        enterLoginPage.shouldBe(visible).click();
     }
 
 

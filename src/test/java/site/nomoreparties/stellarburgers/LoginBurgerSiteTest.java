@@ -13,8 +13,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 
 public class LoginBurgerSiteTest {
@@ -23,6 +22,7 @@ public class LoginBurgerSiteTest {
     StellarburgerMainPage mainPage = new StellarburgerMainPage();
     LoginPage loginPage = new LoginPage();
     RegistrationPage registrationPage = new RegistrationPage();
+    ForgotPasswordPage forgotPasswordPage =new ForgotPasswordPage();
 
     public String userEmail;
     public String userPassword;
@@ -35,6 +35,9 @@ public class LoginBurgerSiteTest {
         mainPage = open("https://stellarburgers.nomoreparties.site/", StellarburgerMainPage.class);
         loginPage = open("https://stellarburgers.nomoreparties.site/", LoginPage.class);
         registrationPage = open("https://stellarburgers.nomoreparties.site/", RegistrationPage.class);
+        forgotPasswordPage = open("https://stellarburgers.nomoreparties.site/", ForgotPasswordPage.class);
+
+
         Map<String, String> userData = userOperations.register();
         userEmail = userData.get("email");
         userPassword = userData.get("password");
@@ -48,6 +51,40 @@ public class LoginBurgerSiteTest {
         String expected = "Оформить заказ";
         Assert.assertEquals(expected,actual);
     }
+
+    @Test
+    public void  testEnterPersonalProfileButton() {
+        mainPage.clickPersonalProfileInMainPage();
+        loginPage.successLogin(userEmail,userPassword);
+        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        String expected = "Оформить заказ";
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void  testEnterButtonInRegistraionPage() {
+        mainPage.clickPersonalProfileInMainPage();
+        loginPage.goToRegistrationPage();
+        registrationPage.clickEnterButton();
+        loginPage.successLogin(userEmail,userPassword);
+        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        String expected = "Оформить заказ";
+        Assert.assertEquals(expected,actual);
+    }
+
+    @Test
+    public void  testEnterButtonForgotPasswordPage() {
+        mainPage.clickPersonalProfileInMainPage();
+        loginPage.clickForgotPasswordButton();
+        forgotPasswordPage.clickEnterButton();
+        loginPage.successLogin(userEmail,userPassword);
+        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        String expected = "Оформить заказ";
+        Assert.assertEquals(expected,actual);
+    }
+
+
+
 
     @After
     public void tearDown(){
