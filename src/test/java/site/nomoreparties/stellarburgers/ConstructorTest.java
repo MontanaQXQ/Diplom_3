@@ -9,8 +9,9 @@ import org.junit.Test;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import java.util.Map;
-
 import static com.codeborne.selenide.Selenide.*;
+
+import java.util.concurrent.TimeUnit;
 
 public class ConstructorTest {
 
@@ -43,6 +44,7 @@ public class ConstructorTest {
     @Test
     public void  testClickBunInConstructor() throws InterruptedException {
         mainPage.clickSauce();
+        TimeUnit.SECONDS.sleep(5);
         mainPage.clickBun();
     }
 
