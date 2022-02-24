@@ -1,53 +1,50 @@
 package site.nomoreparties.stellarburgers;
 
-import com.UserOperations;
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.WebDriverRunner;
-import io.restassured.RestAssured;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Map;
+import static com.codeborne.selenide.Selectors.byXpath;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 import static com.codeborne.selenide.Selenide.open;
 
 public class SuccessRegistrationTest {
 
-   // UserOperations userOperations = new UserOperations();
-  //  public String userEmail;
-  //  public String userPassword;
-
     StellarburgerMainPage mainPage = new StellarburgerMainPage();
     LoginPage loginPage = new LoginPage();
+    RegistrationPage registrationPage = new RegistrationPage();
 
     @Before
     public void testBefore() {
-        Configuration.holdBrowserOpen = true;
         mainPage = open("https://stellarburgers.nomoreparties.site/", StellarburgerMainPage.class);
         loginPage = open("https://stellarburgers.nomoreparties.site/", LoginPage.class);
-
-//        RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
-//        Map<String, String> userData = userOperations.register();
-//        userEmail = userData.get("email");
-//        userPassword = userData.get("password");
+        registrationPage = open("https://stellarburgers.nomoreparties.site/", RegistrationPage.class);
 
     }
 
     @Test
-    public void testOrderingScooterFirstStep() {
+    public void testSuccsessReistrationUser() {
         mainPage.clickProfileInMainPage();
-        loginPage.check();
+        loginPage.goToRegistrationPage();
+        registrationPage.successRegistration();
+        String actual = $(byXpath(".//h2[contains(text(),'Вход')]")).getText();
+        String expected = "Вход";
+        Assert.assertEquals(expected,actual);
+
     }
 
+    @Test
+    public void wrongReistrationUser() {
+        mainPage.clickProfileInMainPage();
+        loginPage.goToRegistrationPage();
+        registrationPage.wrongRegistration();
+        String actual = $(byXpath(".//*[contains(text(),'Некорректный пароль')]")).getText();
+        String expected = "Некорректный пароль";
+        Assert.assertEquals(expected,actual);
 
-//    @After
-//    public void CreateUserE(){
-//        userOperations.delete();
-//
-//    }
+    }
 
 }

@@ -13,11 +13,11 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class StellarburgerMainPage {
 
+    //Локатор кнопки "Личный Кабинет"
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Личный Кабинет')]")
-    private SelenideElement enterLoginPage;
+    private SelenideElement enterLoginPagePersonalProfile;
 
     public void clickProfileInMainPage() {
-        enterLoginPage.shouldBe(visible).click();
-
+        enterLoginPagePersonalProfile.shouldBe(visible).click();
     }
 }
