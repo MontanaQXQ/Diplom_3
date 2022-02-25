@@ -1,4 +1,4 @@
-package site.nomoreparties.stellarburgers;
+package site.nomoreparties.stellarburgers.ChromeTests;
 
 
 import com.UserOperations;
@@ -10,6 +10,12 @@ import org.junit.Before;
 import org.junit.Test;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import site.nomoreparties.stellarburgers.ForgotPasswordPage;
+import site.nomoreparties.stellarburgers.LoginPage;
+import site.nomoreparties.stellarburgers.RegistrationPage;
+import site.nomoreparties.stellarburgers.StellarburgerMainPage;
+import io.qameta.allure.junit4.DisplayName;
+
 import java.util.Map;
 
 import static com.codeborne.selenide.Selectors.byXpath;
@@ -30,7 +36,6 @@ public class LoginBurgerSiteTest {
 
     @Before
     public void setUp() {
-        Configuration.holdBrowserOpen = true;
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         mainPage = open("https://stellarburgers.nomoreparties.site/", StellarburgerMainPage.class);
         loginPage = open("https://stellarburgers.nomoreparties.site/", LoginPage.class);
@@ -46,9 +51,10 @@ public class LoginBurgerSiteTest {
     @After
     public void tearDown(){
         userOperations.delete();
+        webdriver().driver().close();
 
     }
-
+    @DisplayName("Кейс Проверь вход по кнопке «Войти в аккаунт» на главной.")
     @Test
     public void  testEnterAccountButton() {
         mainPage.clickEnterAccountButtonInMainPage();
@@ -58,6 +64,7 @@ public class LoginBurgerSiteTest {
         Assert.assertEquals(expected,actual);
     }
 
+    @DisplayName("Кейс Проверь вход через кнопку «Личный кабинет»")
     @Test
     public void  testEnterPersonalProfileButton() {
         mainPage.clickPersonalProfileInMainPage();
@@ -66,7 +73,7 @@ public class LoginBurgerSiteTest {
         String expected = "Оформить заказ";
         Assert.assertEquals(expected,actual);
     }
-
+    @DisplayName("Кейс Проверь вход через кнопку в форме регистрации")
     @Test
     public void  testEnterButtonInRegistraionPage() {
         mainPage.clickPersonalProfileInMainPage();
@@ -77,7 +84,7 @@ public class LoginBurgerSiteTest {
         String expected = "Оформить заказ";
         Assert.assertEquals(expected,actual);
     }
-
+    @DisplayName("Кейс Проверь вход через кнопку в форме восстановления пароля")
     @Test
     public void  testEnterButtonForgotPasswordPage() {
         mainPage.clickPersonalProfileInMainPage();

@@ -1,18 +1,13 @@
 package site.nomoreparties.stellarburgers;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
+
 import com.codeborne.selenide.SelenideElement;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
-import java.util.Locale;
-
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.*;
-import static com.codeborne.selenide.Selenide.*;
+import io.qameta.allure.Step;
+
+
 
 public class ForgotPasswordPage {
 
@@ -24,7 +19,7 @@ public class ForgotPasswordPage {
     @FindBy(how = How.XPATH,using = ".//h2[contains(text(),'Восстановление пароля')]")
     private SelenideElement headTextForgotPassword;
 
-
+    @Step("Метод клика по кнопке Войти на странице Восстановления Пароля")
     public  void clickEnterButton(){
         headTextForgotPassword.shouldBe(exist);
         enterLoginPage.shouldBe(visible).click();

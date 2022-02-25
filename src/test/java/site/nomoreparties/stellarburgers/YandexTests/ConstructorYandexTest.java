@@ -1,19 +1,22 @@
-package site.nomoreparties.stellarburgers;
+package site.nomoreparties.stellarburgers.YandexTests;
 
 import com.UserOperations;
-import com.codeborne.selenide.Configuration;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import java.util.Map;
-import static com.codeborne.selenide.Selenide.*;
+import site.nomoreparties.stellarburgers.StellarburgerMainPage;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class ConstructorTest {
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
+
+public class ConstructorYandexTest {
 
     UserOperations userOperations = new UserOperations();
     StellarburgerMainPage mainPage = new StellarburgerMainPage();
@@ -22,7 +25,7 @@ public class ConstructorTest {
 
     @Before
     public void setUp() {
-        Configuration.holdBrowserOpen = true;
+        System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
         mainPage = open("https://stellarburgers.nomoreparties.site/", StellarburgerMainPage.class);
 
@@ -34,13 +37,15 @@ public class ConstructorTest {
     @After
     public void tearDown(){
         userOperations.delete();
+        webdriver().driver().close();
     }
-
+    @DisplayName("Кейс Проверь, что работают переходы к разделам:«Соусы»")
     @Test
     public void  testClickSauceInConstructor() {
         mainPage.clickSauce();
     }
 
+    @DisplayName("Кейс Проверь, что работают переходы к разделам:«Булки»")
     @Test
     public void  testClickBunInConstructor() throws InterruptedException {
         mainPage.clickSauce();
@@ -48,6 +53,7 @@ public class ConstructorTest {
         mainPage.clickBun();
     }
 
+    @DisplayName("Кейс Проверь, что работают переходы к разделам:«Начинки»")
     @Test
     public void  testClickFillingInConstructor() {
         mainPage.clickFilling();

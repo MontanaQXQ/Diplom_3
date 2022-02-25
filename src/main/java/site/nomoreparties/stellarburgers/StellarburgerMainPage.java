@@ -1,10 +1,10 @@
 package site.nomoreparties.stellarburgers;
 
-import com.codeborne.selenide.Condition;
+
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
+import io.qameta.allure.Step;
 import static com.codeborne.selenide.Condition.*;
 
 public class StellarburgerMainPage {
@@ -49,6 +49,9 @@ public class StellarburgerMainPage {
     @FindBy(how = How.XPATH, using = ".//h2[contains(text(),'Начинки')]")
     private SelenideElement headTextFilling;
 
+    // Логотип Stellar Burgers
+    @FindBy (how = How.XPATH, using = "//*[@class='AppHeader_header__logo__2D0X2']")
+    private SelenideElement stellarBurgersButton;
 
 
 
@@ -57,37 +60,43 @@ public class StellarburgerMainPage {
 
 
 
-    //Метод клика по кнопке Личный кабинет
+    @Step("Метод  клика по кнопке Личный кабинет.")
     public void clickPersonalProfileInMainPage() {
-        createOrderButton.shouldBe(exist);
+        enterLoginPagePersonalProfile.shouldBe(exist);
         enterLoginPagePersonalProfile.shouldBe(visible).click();
     }
-    //Метод клика по кнопке Войти в Аккаунт
+    @Step("Метод  клика по кнопке Войти в Аккаунт.")
     public void clickEnterAccountButtonInMainPage() {
         enterLoginPageEnterAccountButton.shouldBe(visible).click();
     }
 
-    //Метод клика по кнопке Конструктор
-    public void clickСonstructorButton() {
+    @Step("Метод клика по кнопке Конструктор.")
+    public void clickConstructorButton() {
         constructorButton.shouldBe(visible).click();
     }
 
-    //Метод клика по кнопке Соусы
+    @Step("Метод клика по логотипу Stellar Burgers.")
+    public void clickStellarBurgersButton() {
+        constructorButton.shouldBe(visible).click();
+    }
+
+    @Step("Методклика по кнопке Соусы.")
     public void clickSauce() {
         sauceButton.shouldBe(visible).click();
         headTextSauce.shouldBe(visible);
     }
 
-    //Метод клика по кнопке Булки
+    @Step("Методклика по кнопке Булки.")
     public void clickBun() {
         bunButton.shouldBe(visible).click();
         headTextBun.shouldBe(visible);
     }
 
-    //Метод клика по кнопке Начинки
+    @Step("Методклика по кнопке Начинки.")
     public void clickFilling() {
         fillingButton.shouldBe(visible).click();
         headTextFilling.shouldBe(visible);
     }
 
 }
+

@@ -2,14 +2,17 @@ package site.nomoreparties.stellarburgers;
 
 import com.codeborne.selenide.SelenideElement;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import io.qameta.allure.Step;
 
 import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.*;
 
 public class RegistrationPage {
+
 
     //Локатор поля ввода Name
     @FindBy(how = How.XPATH,using = ".//input[@name='name']")
@@ -56,20 +59,20 @@ public class RegistrationPage {
         passwordPlaceHolder.setValue(password);
 
     }
-    //метод  корректного заполнения формы регистрации
+    @Step("Метод  корректного заполнения формы регистрации.")
     public void correctFillingRegistrationForm() {
         setName(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT));
         setEmail(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT) + "@yandex.ru");
         setPassword(RandomStringUtils.random(6,true,true));
     }
-    //метод некорректного заполнения формы регистрации , длинна пароля меньше положенного.
+    @Step("Метод  некорректного заполнения формы регистрации , длинна пароля меньше положенного.")
     public void inCorrectFillingRegistrationForm() {
         setName(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT));
         setEmail(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT) + "@yandex.ru");
         setPassword(RandomStringUtils.random(5,true,true));
     }
 
-    //метод упешной регистрации пользовател
+    @Step("Метод  упешной регистрации пользовател.")
     public void successRegistration(){
         headTextRegistration.shouldBe(exist);
         correctFillingRegistrationForm();
@@ -77,18 +80,47 @@ public class RegistrationPage {
 
 
     }
-    //метод неправильнйо регистрации с возникающей ошибкой "Некорректный пароль"
+    @Step("Метод  неправильнйо регистрации с возникающей ошибкой Некорректный пароль.")
     public void wrongRegistration(){
         headTextRegistration.shouldBe(exist);
         inCorrectFillingRegistrationForm();
         registrButton.click();
         wrongPasswordMessage.shouldBe(exist);
     }
-    //метод нажатия кнопки "войти" на тсранице регистрации.
+    @Step("Метод  нажатия кнопки войти на странице регистрации.")
     public void clickEnterButton(){
         headTextRegistration.shouldBe(exist);
         enterLoginPage.shouldBe(visible).click();
     }
 
+
+
+
+
+    //Методы для Яндекс браузера.
+    //Яндекс браузер сохраняет пароль и Почтовый адрес и вставляет их автоматически как только открывается форма регистрации
+    //Для этого я создал такой костыльный вариант, что бы удалять автоподставления яндекса в плэйсхолдерах
+    //Я не знаю как отключить эту настройку в запускаемом yandexdriver браузере
+
+
+    String chord = Keys.chord(Keys.CONTROL, "a");
+
+    @Step("Метод некорректного заполнения формы регистрации для Yandex.Browser , длинна пароля меньше положенного.")
+    public void inCorrectFillingRegistrationFormYandex() {
+        namelPlaceHolder.sendKeys(chord,Keys.BACK_SPACE);
+        setName(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT));
+        emailPlaceHolder.sendKeys(chord,Keys.BACK_SPACE);
+        setEmail(RandomStringUtils.randomAlphabetic(6).toLowerCase(Locale.ROOT) + "@yandex.ru");
+        passwordPlaceHolder.sendKeys(chord,Keys.BACK_SPACE);
+        setPassword(RandomStringUtils.random(5,true,true));
+    }
+
+    @Step("Метод  метод неправильнйо регистрации в Yandex.Browser с возникающей ошибкой Некорректный пароль.")
+    public void wrongRegistrationYandex(){
+        headTextRegistration.shouldBe(exist);
+        inCorrectFillingRegistrationFormYandex();
+        registrButton.click();
+        wrongPasswordMessage.shouldBe(exist);
+    }
 
 }
