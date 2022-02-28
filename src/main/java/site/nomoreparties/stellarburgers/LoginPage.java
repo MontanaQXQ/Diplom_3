@@ -2,55 +2,52 @@ package site.nomoreparties.stellarburgers;
 
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import static com.codeborne.selenide.Condition.*;
-import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.visible;
 
 
 public class LoginPage {
 
     //окатор поля ввода Email
-    @FindBy(how = How.XPATH,using = ".//input[@type='text']")
+    @FindBy(how = How.XPATH, using = ".//input[@type='text']")
     private SelenideElement emailPlaceHolder;
 
     //Локатор поля ввода пароля
-    @FindBy(how = How.XPATH,using = ".//input[@type='password']")
+    @FindBy(how = How.XPATH, using = ".//input[@type='password']")
     private SelenideElement passwordPlaceHolder;
 
     //Локатор кнопки Зарегесрироваться
-    @FindBy(how = How.XPATH,using = ".//a[@href='/register']")
+    @FindBy(how = How.XPATH, using = ".//a[@href='/register']")
     private SelenideElement enterRegistrationPage;
 
     //Локатор слова Вход в заголовке
-    @FindBy(how = How.XPATH,using = ".//h2[contains(text(),'Вход')]")
+    @FindBy(how = How.XPATH, using = ".//h2[contains(text(),'Вход')]")
     private SelenideElement headTextLogin;
 
     //Локатор кнопки "Войти"
-    @FindBy(how = How.XPATH,using = "//*[contains(text(),'Войти')]")
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Войти')]")
     private SelenideElement enterAccountButton;
 
     //Локатор кнопки Зарегесрироваться
-    @FindBy(how = How.XPATH,using = ".//a[@href='/forgot-password']")
+    @FindBy(how = How.XPATH, using = ".//a[@href='/forgot-password']")
     private SelenideElement enterForgotPasswordPage;
 
 
-
-
-    public void setEmail(String email){
+    public void setEmail(String email) {
         emailPlaceHolder.setValue(email);
     }
 
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         passwordPlaceHolder.setValue(password);
     }
 
     @Step("Метод перехода на страницу Регистрации")
-    public void goToRegistrationPage()  {
-        headTextLogin.shouldBe(exist);
-        enterRegistrationPage.click();
+    public void goToRegistrationPage() {
+        enterRegistrationPage.shouldBe(visible).click();
     }
 
     @Step("Метод заполнения формы на странице Логин.")
@@ -58,17 +55,21 @@ public class LoginPage {
         setEmail(email);
         setPassword(password);
     }
+
     @Step("Метод  Успешного входа в Личный кабинет Пользователя.")
-    public void successLogin(String email, String password){
-        headTextLogin.shouldBe(exist);
-        enterAccount(email,password);
-        enterAccountButton.click();
+    public void successLogin(String email, String password) {
+        enterAccount(email, password);
+        enterAccountButton.shouldBe(visible).click();
     }
 
     @Step("Метод  клика на кнопку Восстановить пароль.")
-    public void clickForgotPasswordButton(){
-        headTextLogin.shouldBe(exist);
+    public void clickForgotPasswordButton() {
         enterForgotPasswordPage.shouldBe(visible).click();
+    }
+
+    @Step("Метод получения текста локатора - (Вход)")
+    public String headTextLoginGetText() {
+        return headTextLogin.getText();
     }
 
 }

@@ -2,37 +2,34 @@ package site.nomoreparties.stellarburgers.ChromeTests;
 
 
 import com.UserOperations;
-import com.codeborne.selenide.Configuration;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
 import site.nomoreparties.stellarburgers.ForgotPasswordPage;
 import site.nomoreparties.stellarburgers.LoginPage;
 import site.nomoreparties.stellarburgers.RegistrationPage;
 import site.nomoreparties.stellarburgers.StellarburgerMainPage;
-import io.qameta.allure.junit4.DisplayName;
 
 import java.util.Map;
 
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
 
 
 public class LoginBurgerSiteTest {
 
+    public String userEmail;
+    public String userPassword;
     UserOperations userOperations = new UserOperations();
     StellarburgerMainPage mainPage = new StellarburgerMainPage();
     LoginPage loginPage = new LoginPage();
     RegistrationPage registrationPage = new RegistrationPage();
-    ForgotPasswordPage forgotPasswordPage =new ForgotPasswordPage();
-
-    public String userEmail;
-    public String userPassword;
-
+    ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage();
 
     @Before
     public void setUp() {
@@ -49,56 +46,55 @@ public class LoginBurgerSiteTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         userOperations.delete();
         webdriver().driver().close();
 
     }
+
     @DisplayName("Кейс Проверь вход по кнопке «Войти в аккаунт» на главной.")
     @Test
-    public void  testEnterAccountButton() {
+    public void testEnterAccountButton() {
         mainPage.clickEnterAccountButtonInMainPage();
-        loginPage.successLogin(userEmail,userPassword);
-        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        loginPage.successLogin(userEmail, userPassword);
+        String actual = mainPage.createOrderButtonGetText();
         String expected = "Оформить заказ";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals("Ошибка. Текст не совпадает с ожидаемым", expected, actual);
     }
 
     @DisplayName("Кейс Проверь вход через кнопку «Личный кабинет»")
     @Test
-    public void  testEnterPersonalProfileButton() {
+    public void testEnterPersonalProfileButton() {
         mainPage.clickPersonalProfileInMainPage();
-        loginPage.successLogin(userEmail,userPassword);
-        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        loginPage.successLogin(userEmail, userPassword);
+        String actual = mainPage.createOrderButtonGetText();
         String expected = "Оформить заказ";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals("Ошибка. Текст не совпадает с ожидаемым", expected, actual);
     }
+
     @DisplayName("Кейс Проверь вход через кнопку в форме регистрации")
     @Test
-    public void  testEnterButtonInRegistraionPage() {
+    public void testEnterButtonInRegistraionPage() {
         mainPage.clickPersonalProfileInMainPage();
         loginPage.goToRegistrationPage();
         registrationPage.clickEnterButton();
-        loginPage.successLogin(userEmail,userPassword);
-        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        loginPage.successLogin(userEmail, userPassword);
+        String actual = mainPage.createOrderButtonGetText();
         String expected = "Оформить заказ";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals("Ошибка. Текст не совпадает с ожидаемым", expected, actual);
     }
+
     @DisplayName("Кейс Проверь вход через кнопку в форме восстановления пароля")
     @Test
-    public void  testEnterButtonForgotPasswordPage() {
+    public void testEnterButtonForgotPasswordPage() {
         mainPage.clickPersonalProfileInMainPage();
         loginPage.clickForgotPasswordButton();
         forgotPasswordPage.clickEnterButton();
-        loginPage.successLogin(userEmail,userPassword);
-        String actual = $(byXpath("//*[contains(text(),'Оформить заказ')]")).getText();
+        loginPage.successLogin(userEmail, userPassword);
+        String actual = mainPage.createOrderButtonGetText();
         String expected = "Оформить заказ";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals("Ошибка. Текст не совпадает с ожидаемым", expected, actual);
     }
-
-
-
-
 
 
 }

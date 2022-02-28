@@ -1,27 +1,27 @@
 package site.nomoreparties.stellarburgers.ChromeTests;
 
 import com.UserOperations;
-import com.codeborne.selenide.Configuration;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import site.nomoreparties.stellarburgers.StellarburgerMainPage;
-import io.qameta.allure.junit4.DisplayName;
 
 import java.util.Map;
-import static com.codeborne.selenide.Selenide.*;
 
-import java.util.concurrent.TimeUnit;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
 
 public class ConstructorTest {
 
-    UserOperations userOperations = new UserOperations();
-    StellarburgerMainPage mainPage = new StellarburgerMainPage();
     public String userEmail;
     public String userPassword;
+    UserOperations userOperations = new UserOperations();
+    StellarburgerMainPage mainPage = new StellarburgerMainPage();
 
     @Before
     public void setUp() {
@@ -34,27 +34,37 @@ public class ConstructorTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         userOperations.delete();
         webdriver().driver().close();
     }
+
     @DisplayName("Кейс Проверь, что работают переходы к разделам:«Соусы»")
     @Test
-    public void  testClickSauceInConstructor() {
+    public void testClickSauceInConstructor() {
         mainPage.clickSauce();
-    }
-    @DisplayName("Кейс Проверь, что работают переходы к разделам:«Булки»")
-    @Test
-    public void  testClickBunInConstructor() throws InterruptedException {
-        mainPage.clickSauce();
-        TimeUnit.SECONDS.sleep(5);
-        mainPage.clickBun();
-    }
-    @DisplayName("Кейс Проверь, что работают переходы к разделам:«Начинки»")
-    @Test
-    public void  testClickFillingInConstructor() {
-        mainPage.clickFilling();
+        String actual = mainPage.sauceHeadGetText();
+        String expected = "Соусы";
+        Assert.assertEquals("Ошибка. Текст не совпадает с ожидаемым", expected, actual);
     }
 
+    @DisplayName("Кейс Проверь, что работают переходы к разделам:«Булки»")
+    @Test
+    public void testClickBunInConstructor() {
+        mainPage.clickSauce();
+        mainPage.clickBun();
+        String actual = mainPage.bunHeadGetText();
+        String expected = "Булки";
+        Assert.assertEquals("Ошибка. Текст не совпадает с ожидаемым", expected, actual);
+    }
+
+    @DisplayName("Кейс Проверь, что работают переходы к разделам:«Начинки»")
+    @Test
+    public void testClickFillingInConstructor() {
+        mainPage.clickFilling();
+        String actual = mainPage.fillingHeadGetText();
+        String expected = "Начинки";
+        Assert.assertEquals("Ошибка. Текст не совпадает с ожидаемым", expected, actual);
+    }
 
 }

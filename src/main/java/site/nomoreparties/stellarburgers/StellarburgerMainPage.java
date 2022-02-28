@@ -2,10 +2,12 @@ package site.nomoreparties.stellarburgers;
 
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import io.qameta.allure.Step;
-import static com.codeborne.selenide.Condition.*;
+
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 
 public class StellarburgerMainPage {
 
@@ -50,21 +52,19 @@ public class StellarburgerMainPage {
     private SelenideElement headTextFilling;
 
     // Логотип Stellar Burgers
-    @FindBy (how = How.XPATH, using = "//*[@class='AppHeader_header__logo__2D0X2']")
+    @FindBy(how = How.XPATH, using = "//*[@class='AppHeader_header__logo__2D0X2']")
     private SelenideElement stellarBurgersButton;
 
-
-
-
-
-
+    // Логотип Stellar Burgers
+    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Соберите бургер')]")
+    private SelenideElement headLogoConstructBurger;
 
 
     @Step("Метод  клика по кнопке Личный кабинет.")
     public void clickPersonalProfileInMainPage() {
-        enterLoginPagePersonalProfile.shouldBe(exist);
         enterLoginPagePersonalProfile.shouldBe(visible).click();
     }
+
     @Step("Метод  клика по кнопке Войти в Аккаунт.")
     public void clickEnterAccountButtonInMainPage() {
         enterLoginPageEnterAccountButton.shouldBe(visible).click();
@@ -72,30 +72,53 @@ public class StellarburgerMainPage {
 
     @Step("Метод клика по кнопке Конструктор.")
     public void clickConstructorButton() {
-        constructorButton.shouldBe(visible).click();
+        constructorButton.shouldHave(exist).click();
     }
 
     @Step("Метод клика по логотипу Stellar Burgers.")
     public void clickStellarBurgersButton() {
-        constructorButton.shouldBe(visible).click();
+        constructorButton.shouldHave(exist).click();
     }
 
     @Step("Методклика по кнопке Соусы.")
     public void clickSauce() {
-        sauceButton.shouldBe(visible).click();
-        headTextSauce.shouldBe(visible);
+        sauceButton.shouldHave(exist).click();
+    }
+
+    @Step("Метод получения текста Соусы.")
+    public String sauceHeadGetText() {
+        return headTextSauce.getText();
     }
 
     @Step("Методклика по кнопке Булки.")
     public void clickBun() {
-        bunButton.shouldBe(visible).click();
-        headTextBun.shouldBe(visible);
+        bunButton.shouldHave(exist).click();
+
+    }
+
+    @Step("Метод получения текста Булки.")
+    public String bunHeadGetText() {
+        return headTextBun.getText();
     }
 
     @Step("Методклика по кнопке Начинки.")
     public void clickFilling() {
-        fillingButton.shouldBe(visible).click();
-        headTextFilling.shouldBe(visible);
+        fillingButton.shouldHave(exist).click();
+    }
+
+    @Step("Метод получения текста Начинки.")
+    public String fillingHeadGetText() {
+        return headTextFilling.getText();
+    }
+
+    @Step("Метод получения текста локатора - (Собери бургер)")
+    public String headLogoConstructBurgerGetText() {
+        return headLogoConstructBurger.getText();
+    }
+
+    @Step("Метод получения текста Оформить Заказ.")
+    public String createOrderButtonGetText() {
+        return createOrderButton.getText();
     }
 
 }

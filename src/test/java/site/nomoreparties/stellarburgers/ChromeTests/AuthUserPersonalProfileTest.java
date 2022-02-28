@@ -1,33 +1,31 @@
 package site.nomoreparties.stellarburgers.ChromeTests;
-import com.UserOperations;
 
+import com.UserOperations;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
+import io.restassured.filter.log.RequestLoggingFilter;
+import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
-import io.qameta.allure.junit4.DisplayName;
 import site.nomoreparties.stellarburgers.AccountProfilePage;
 import site.nomoreparties.stellarburgers.LoginPage;
 import site.nomoreparties.stellarburgers.StellarburgerMainPage;
 
-
 import java.util.Map;
 
-import static com.codeborne.selenide.Selectors.byXpath;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.webdriver;
 
 public class AuthUserPersonalProfileTest {
 
+    public String userEmail;
+    public String userPassword;
     UserOperations userOperations = new UserOperations();
     StellarburgerMainPage mainPage = new StellarburgerMainPage();
     LoginPage loginPage = new LoginPage();
     AccountProfilePage accountProfilePage = new AccountProfilePage();
-
-    public String userEmail;
-    public String userPassword;
 
     @Before
     public void setUp() {
@@ -42,55 +40,57 @@ public class AuthUserPersonalProfileTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         userOperations.delete();
         webdriver().driver().close();
 
     }
+
     @DisplayName("Кейс Проверь переход по клику на «Личный кабинет»")
     @Test
-    public void  testEnterPersonalProfile() {
+    public void testEnterPersonalProfile() {
         mainPage.clickEnterAccountButtonInMainPage();
-        loginPage.successLogin(userEmail,userPassword);
+        loginPage.successLogin(userEmail, userPassword);
         mainPage.clickPersonalProfileInMainPage();
-        String actual = $(byXpath("//*[contains(text(),'Выход')]")).getText();
+        String actual = accountProfilePage.exitButtonGetText();
         String expected = "Выход";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
+
     @DisplayName("Кейс Проверь переход по клику на «Конструктор».")
     @Test
-    public void  testGoToConstructorFromPersonalProfile() {
+    public void testGoToConstructorFromPersonalProfile() {
         mainPage.clickEnterAccountButtonInMainPage();
-        loginPage.successLogin(userEmail,userPassword);
+        loginPage.successLogin(userEmail, userPassword);
         mainPage.clickPersonalProfileInMainPage();
         mainPage.clickConstructorButton();
-        String actual = $(byXpath("//*[contains(text(),'Соберите бургер')]")).getText();
+        String actual = mainPage.headLogoConstructBurgerGetText();
         String expected = "Соберите бургер";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @DisplayName("Кейс Проверь переход по клику на логотип Stellar Burgers.")
     @Test
-    public void  testGoToMainPageIfClicLogoFromPersonalProfile() {
+    public void testGoToMainPageIfClicLogoFromPersonalProfile() {
         mainPage.clickEnterAccountButtonInMainPage();
-        loginPage.successLogin(userEmail,userPassword);
+        loginPage.successLogin(userEmail, userPassword);
         mainPage.clickPersonalProfileInMainPage();
         mainPage.clickStellarBurgersButton();
-        String actual = $(byXpath("//*[contains(text(),'Соберите бургер')]")).getText();
+        String actual = mainPage.headLogoConstructBurgerGetText();
         String expected = "Соберите бургер";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals("Ошибка Текст не совпадает с ожидаемым", expected, actual);
     }
 
     @DisplayName("Кейс Проверь выход по кнопке «Выйти» в личном кабинете.")
     @Test
-    public void  testExitFromPersonalProfile() {
+    public void testExitFromPersonalProfile() {
         mainPage.clickEnterAccountButtonInMainPage();
-        loginPage.successLogin(userEmail,userPassword);
+        loginPage.successLogin(userEmail, userPassword);
         mainPage.clickPersonalProfileInMainPage();
         accountProfilePage.clickExitButton();
-        String actual = $(byXpath("//*[contains(text(),'Вход')]")).getText();
+        String actual = loginPage.headTextLoginGetText();
         String expected = "Вход";
-        Assert.assertEquals(expected,actual);
+        Assert.assertEquals("Ошибка Текст не совпадает с ожидаемым", expected, actual);
     }
 
 }
