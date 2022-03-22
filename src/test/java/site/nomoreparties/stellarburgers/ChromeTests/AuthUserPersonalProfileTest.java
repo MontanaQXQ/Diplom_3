@@ -1,6 +1,8 @@
 package site.nomoreparties.stellarburgers.ChromeTests;
 
 import com.UserOperations;
+import com.codeborne.selenide.Configuration;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -9,6 +11,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import site.nomoreparties.stellarburgers.AccountProfilePage;
 import site.nomoreparties.stellarburgers.LoginPage;
 import site.nomoreparties.stellarburgers.StellarburgerMainPage;
@@ -27,6 +31,7 @@ public class AuthUserPersonalProfileTest {
     LoginPage loginPage = new LoginPage();
     AccountProfilePage accountProfilePage = new AccountProfilePage();
 
+
     @Before
     public void setUp() {
         RestAssured.filters(new RequestLoggingFilter(), new ResponseLoggingFilter());
@@ -37,10 +42,15 @@ public class AuthUserPersonalProfileTest {
         Map<String, String> userData = userOperations.register();
         userEmail = userData.get("email");
         userPassword = userData.get("password");
+
+
+
+
     }
 
     @After
     public void tearDown() {
+
         userOperations.delete();
         webdriver().driver().close();
 
@@ -83,6 +93,7 @@ public class AuthUserPersonalProfileTest {
 
     @DisplayName("Кейс Проверь выход по кнопке «Выйти» в личном кабинете.")
     @Test
+    @AllureId("36")
     public void testExitFromPersonalProfile() {
         mainPage.clickEnterAccountButtonInMainPage();
         loginPage.successLogin(userEmail, userPassword);
@@ -93,4 +104,16 @@ public class AuthUserPersonalProfileTest {
         Assert.assertEquals("Ошибка Текст не совпадает с ожидаемым", expected, actual);
     }
 
+    @DisplayName("ТЕСТ ТЕСТ ТЕСТ.")
+    @Test
+    @AllureId("100")
+    public void newFreshTest() {
+        mainPage.clickEnterAccountButtonInMainPage();
+        loginPage.successLogin(userEmail, userPassword);
+        mainPage.clickPersonalProfileInMainPage();
+        accountProfilePage.clickExitButton();
+        String actual = loginPage.headTextLoginGetText();
+        String expected = "Вход";
+        Assert.assertEquals("Ошибка Текст не совпадает с ожидаемым", expected, actual);
+    }
 }

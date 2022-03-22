@@ -28,3 +28,6 @@
     - «Булки»,
     - «Соусы»,
     - «Начинки».
+# Как тестировал кроссбраузерность.
+- В проекте создал папку resource и положил в нее yandex webdriver. 
+- Для выполнения кейсов в Yandex Browser использовал   System.setProperty("webdriver.chrome.driver", "src/resources/yandexdriver.exe");
