@@ -1,0 +1,8 @@
+site\nomoreparties\stellarburgers\ChromeTests\RegistrationTest.class
+site\nomoreparties\stellarburgers\YandexTests\LoginBurgerSiteYandexTest.class
+site\nomoreparties\stellarburgers\ChromeTests\AuthUserPersonalProfileTest.class
+site\nomoreparties\stellarburgers\YandexTests\AuthUserPersonalProfileYandexTest.class
+site\nomoreparties\stellarburgers\YandexTests\ConstructorYandexTest.class
+site\nomoreparties\stellarburgers\ChromeTests\ConstructorTest.class
+site\nomoreparties\stellarburgers\YandexTests\RegistrationYandexTest.class
+site\nomoreparties\stellarburgers\ChromeTests\LoginBurgerSiteTest.class

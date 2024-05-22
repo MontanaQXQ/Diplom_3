@@ -1,0 +1,84 @@
+-------------------------------------------------------------------------------
+Test set: site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 4, Errors: 4, Skipped: 0, Time elapsed: 0.68 s <<< FAILURE! - in site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest
+testEnterPersonalProfileButton(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.191 s  <<< ERROR!
+org.openqa.selenium.remote.NoSuchDriverException: 
+Unable to obtain: chromedriver, error chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location/
+Build info: version: '4.20.0', revision: '866c76ca80'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.11'
+Driver info: driver.version: SelenideDriver
+selenide.url: https://stellarburgers.nomoreparties.site/
+selenide.baseUrl: http://localhost:8080
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+Caused by: java.lang.IllegalStateException: chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+
+testEnterPersonalProfileButton(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.191 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <202> but was <404>.
+
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.tearDown(LoginBurgerSiteYandexTest.java:51)
+
+testEnterAccountButton(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.132 s  <<< ERROR!
+org.openqa.selenium.remote.NoSuchDriverException: 
+Unable to obtain: chromedriver, error chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location/
+Build info: version: '4.20.0', revision: '866c76ca80'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.11'
+Driver info: driver.version: SelenideDriver
+selenide.url: https://stellarburgers.nomoreparties.site/
+selenide.baseUrl: http://localhost:8080
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+Caused by: java.lang.IllegalStateException: chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+
+testEnterAccountButton(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.132 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <202> but was <404>.
+
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.tearDown(LoginBurgerSiteYandexTest.java:51)
+
+testEnterButtonInRegistraionPage(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.178 s  <<< ERROR!
+org.openqa.selenium.remote.NoSuchDriverException: 
+Unable to obtain: chromedriver, error chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location/
+Build info: version: '4.20.0', revision: '866c76ca80'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.11'
+Driver info: driver.version: SelenideDriver
+selenide.url: https://stellarburgers.nomoreparties.site/
+selenide.baseUrl: http://localhost:8080
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+Caused by: java.lang.IllegalStateException: chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+
+testEnterButtonInRegistraionPage(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.178 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <202> but was <404>.
+
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.tearDown(LoginBurgerSiteYandexTest.java:51)
+
+testEnterButtonForgotPasswordPage(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.177 s  <<< ERROR!
+org.openqa.selenium.remote.NoSuchDriverException: 
+Unable to obtain: chromedriver, error chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors/driver_location/
+Build info: version: '4.20.0', revision: '866c76ca80'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.11'
+Driver info: driver.version: SelenideDriver
+selenide.url: https://stellarburgers.nomoreparties.site/
+selenide.baseUrl: http://localhost:8080
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+Caused by: java.lang.IllegalStateException: chromedriver must exist: C:\Users\dabre\Diplom_3-WEB-Tests\src\resources\yandexdriver.exe
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.setUp(LoginBurgerSiteYandexTest.java:38)
+
+testEnterButtonForgotPasswordPage(site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest)  Time elapsed: 0.178 s  <<< FAILURE!
+java.lang.AssertionError: 
+1 expectation failed.
+Expected status code <202> but was <404>.
+
+	at site.nomoreparties.stellarburgers.YandexTests.LoginBurgerSiteYandexTest.tearDown(LoginBurgerSiteYandexTest.java:51)
+

@@ -1,0 +1,10 @@
+com\Base.class
+com\model\UserRegisterResponse.class
+site\nomoreparties\stellarburgers\StellarburgerMainPage.class
+com\model\User.class
+site\nomoreparties\stellarburgers\LoginPage.class
+site\nomoreparties\stellarburgers\ForgotPasswordPage.class
+site\nomoreparties\stellarburgers\AccountProfilePage.class
+site\nomoreparties\stellarburgers\RegistrationPage.class
+com\UserOperations.class
+com\model\Tokens.class

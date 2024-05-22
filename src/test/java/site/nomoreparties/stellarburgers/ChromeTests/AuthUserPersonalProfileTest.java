@@ -91,6 +91,7 @@ public class AuthUserPersonalProfileTest {
         Assert.assertEquals("Ошибка Текст не совпадает с ожидаемым", expected, actual);
     }
 
+
     @DisplayName("Кейс Проверь выход по кнопке «Выйти» в личном кабинете.")
     @Test
     @AllureId("36")
