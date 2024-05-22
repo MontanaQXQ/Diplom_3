@@ -29,8 +29,15 @@ build-job:       # This job runs in the build stage, which runs first.
 
 UI tests with allure:   # This job runs in the test stage.
   stage: test    # It only starts when the job in the build stage completes successfully.
+  variables:
+    ALLURE_ENDPOINT: https://ippon3.testops.cloud
+    ALLURE_PROJECT_ID: 1
+    ALLURE_RESULTS: target/allure-results
+  before_script:
+   - curl https://github.com/allure-framework/allurectl/releases/latest/download/allurectl_linux_amd64 -O ./allurectl
+   - chmod +x allurectl
   script:
-    - mvn clean test
+    - ./allurectl watch --mvn clean test
 artifacts:
   path:
     - C:\Users\dabre\Diplom_3-WEB-Tests\target\allure-results/*
